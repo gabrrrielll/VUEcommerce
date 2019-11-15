@@ -221,10 +221,10 @@ class Vuecommerce_Admin
 					$price = get_post_meta($post->ID, 'price', true);
 					?>
 
-			<label>Last price</label>
+			<label>Last price</label> <br>
 			<input type="number" name="lastprice" value="<?php print $lastprice; ?>" /> <br />
-			<label>Actual price</label>
-			<input type="number" name="price" value="<?php print $price; ?>" />
+			<label>Actual price *</label><br>
+			<input type="number" name="price" value="<?php print $price; ?>" required />
 
 <?php
 		}

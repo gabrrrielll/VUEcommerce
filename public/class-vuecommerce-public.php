@@ -102,7 +102,7 @@ class Vuecommerce_Public
 					'permalink' => get_the_permalink(),
 					'description' => get_the_content(),
 					'lastprice' => get_post_meta(get_the_ID(), 'lastprice', true),
-					'price' => get_post_meta(get_the_ID(), 'lastprice', true),
+					'price' => get_post_meta(get_the_ID(), 'price', true),
 					'categories' => wp_get_object_terms(get_the_ID(), 'vue_product_category'),
 					'tags' => wp_get_object_terms(get_the_ID(), 'vue_product_tag'),
 					'featured' =>  wp_get_attachment_url(get_post_thumbnail_id($post_id))
