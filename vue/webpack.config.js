@@ -101,7 +101,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       include: /\.min\.bundle\.js$/,
       minimize: true,
-      ecma: 5
+      ecma: 6
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true

@@ -1,28 +1,39 @@
 <template>
   <div>
+    <div id="show-btn" @click="$bvModal.show('modal-cart')">
+      <ios-cart-icon w="30px" h="30px" title="Your Cart" /> Cart
+    </div>
+    <div v-if="this.$store.state.loading === false">
+      <b-spinner variant="primary" label="Spinning"></b-spinner>
+    </div>
     <ShoppingCart />
     <hr />
-    <div id="main">
-      <div v-for="product in products" :key="product.id_product" class="product">
-        <a :href="product.permalink">
-          <h3>{{product.title}}</h3>
-          <div class="product-img">
-            <img :src="setRepresentativeImage(product.featured)" :alt="product.title" />
-          </div>
-          <div class="price">{{product.price}}</div>
-        </a>
-        <div class="add-to-cart" @click="addToCart(product)">
-          <button>Add to cart</button>
-        </div>
-      </div>
-    </div>
+    <b-card-group deck>
+      <b-card
+        v-for="product in products"
+        :key="product.id_product"
+        :img-src="setRepresentativeImage(product.featured)"
+        img-top
+      >
+        <b-card-title>{{ product.title }}</b-card-title>
+        <b-card-sub-title class="mb-2">{{ product.price }}</b-card-sub-title>
+        <b-button
+          variant="outline-primary"
+          class="add-to-cart"
+          @click="addToCart(product)"
+          title="Add to cart"
+        >
+          <ios-cart-icon w="22px" h="22px" title="Add to cart" /> Add to cart
+        </b-button>
+      </b-card>
+    </b-card-group>
   </div>
 </template>
 
 <script>
-import ShoppingCart from './ShoppingCart.vue';
+import ShoppingCart from "./ShoppingCart.vue";
 export default {
-  name: 'ProductsListing',
+  name: "ProductsListing",
 
   components: {
     ShoppingCart
@@ -30,36 +41,32 @@ export default {
 
   computed: {
     products() {
-      return this.$store.state.products;
-      //return this.$store.getters.filterProducts;
+      //return this.$store.state.products;
+      return this.$store.getters.filterProducts;
     }
   },
   methods: {
     setRepresentativeImage(img) {
-      //console.log('url----->', window.location.host);
       if (img !== false) {
         return img;
-      } else return require('.././assets/img/no-image.png');
+      } else return require(".././assets/img/no-image.png");
     },
     addToCart(product) {
-      this.$store.dispatch('addProductToCart', product);
+      this.$store.dispatch("addProductToCart", product);
     }
   },
   created() {
-    this.$store.dispatch('getProducts');
+    this.$store.dispatch("getProducts");
   }
 };
 </script>
 
 <style>
-#main {
-  display: flex;
-  justify-content: space-between;
+svg.ion__svg {
+  bottom: -4px;
+  position: relative;
 }
-.product {
-  width: 20%;
-}
-.product-img img {
-  max-width: 100px;
+img.card-img-top {
+  height: 50%;
 }
 </style>
